@@ -22,9 +22,17 @@ namespace image_repository.Controllers {
     }
 
     // GET: Image
-    public async Task<IActionResult> Index() {
-      return View(await _context.Images.ToListAsync());
+    public async Task<IActionResult> Index(string searchString) {
+
+      var images = from i in _context.Images select i;
+
+      if (!String.IsNullOrEmpty(searchString)) {
+        images = images.Where(i => i.Title.Contains(searchString));
+      }
+
+      return View(await images.ToListAsync());
     }
+
 
     // GET: Image/Details/5
     public async Task<IActionResult> Details(int? id) {

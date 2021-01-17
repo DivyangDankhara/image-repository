@@ -4,9 +4,16 @@
   ViewData["Title"] = "Image Repository";
 }
 
-<p>
-  <a asp-action="Create">Create New</a>
-</p>
+<div style="display:flex; justify-content:center;">
+  <div style="max-width:60%;">
+    <form asp-action="Index" class="input-group">
+      <input type="search" class="form-control rounded" placeholder="Search Image" aria-label="Search Image"
+              aria-describedby="search-addon" name="searchString" />
+      <button type="submit" class="btn btn-outline-primary" style="margin-right:10px;">search</button>
+      <a asp-action="Create" class="btn btn-outline-primary">Upload Image</a>
+    </form>
+  </div>
+</div>
 
 @foreach (var item in Model) {
   <div class="card a">
