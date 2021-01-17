@@ -18,7 +18,7 @@ namespace image_repository.Models {
 
     [Required]
     [NotMapped]
-    [DisplayName("Upload File")]
+    [DisplayName("Upload Image")]
     public IFormFile ImageFile { get; set; }
   }
 }

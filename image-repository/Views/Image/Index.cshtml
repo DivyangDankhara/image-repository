@@ -10,10 +10,13 @@
 
 @foreach (var item in Model) {
   <div class="card a">
-    <img src="@("~/image/"+ item.ImageName)" asp-append-version="true" class="card-img-top" alt="..." width="250px" height="250px">
+    <a asp-action="Details" asp-route-id="@item.ImageId">
+      <img src="@("~/image/"+ item.ImageName)" asp-append-version="true" class="card-img-top" width="250px" height="250px">
+    </a>
     <div class="card-body">
       <h5 class="card-title">@item.Title</h5>
-      <a asp-action="Delete" asp-route-id="@item.ImageId" class="btn btn-primary">Delete</a>
+      <a asp-action="Edit" asp-route-id="@item.ImageId" class="btn btn-primary">Edit</a>
+      <a asp-action="Delete" asp-route-id="@item.ImageId" class="btn btn-danger">Delete</a>
     </div>
   </div>
 }
