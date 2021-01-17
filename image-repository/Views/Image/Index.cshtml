@@ -1,0 +1,36 @@
+﻿@model IEnumerable<image_repository.Models.ImageModel>
+
+@{
+  ViewData["Title"] = "Image Repository";
+}
+
+<p>
+  <a asp-action="Create">Create New</a>
+</p>
+
+@foreach (var item in Model) {
+  <div class="card a">
+    <img src="@("~/image/"+ item.ImageName)" asp-append-version="true" class="card-img-top" alt="..." width="250px" height="250px">
+    <div class="card-body">
+      <h5 class="card-title">@item.Title</h5>
+      <a asp-action="Delete" asp-route-id="@item.ImageId" class="btn btn-primary">Delete</a>
+    </div>
+  </div>
+}
+
+@section Styles { 
+<style>
+  .a {
+    width: 18rem;
+    display: inline-block;
+    margin: 10px;
+    
+    z-index: 0;
+  } 
+  .a:hover {
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;
+    transition-duration: .3s;
+  }
+</style>
+}
+
