@@ -20,7 +20,7 @@
 @foreach (var item in Model) {
   <div class="card a">
     <a asp-action="Details" asp-route-id="@item.ImageId">
-      <img src="@("~/image/"+ item.ImageName)" asp-append-version="true" class="card-img-top" width="250px" height="250px">
+      <img src="@Url.Content("~/Image/"+ item.ImageName)" asp-append-version="true" class="card-img-top" width="250px" height="250px">
     </a>
     <div class="card-body">
       <h5 class="card-title">@item.Title</h5>
