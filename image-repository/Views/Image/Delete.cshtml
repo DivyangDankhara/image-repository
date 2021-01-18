@@ -26,7 +26,7 @@
         Uploaded Image
       </dt>
       <dd class="col-sm-10">
-        <img src="@("~/image/"+Model.ImageName)" asp-append-version="true" width="500px" height="500px" />
+        <img src="@Url.Content("~/image/"+Model.ImageName)" asp-append-version="true" width="500px" height="500px" />
       </dd>
     </dl>
     
