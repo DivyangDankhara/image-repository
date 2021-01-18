@@ -9,10 +9,10 @@ namespace image_repository.Models {
     public int ImageId { get; set; }
 
     [Required]
-    [Column(TypeName = "nvarchar(50)")]
+    [Column(TypeName = "varchar(50)")]
     public string Title { get; set; }
 
-    [Column(TypeName = "nvarchar(100)")]
+    [Column(TypeName = "varchar(100)")]
     [DisplayName("Image Name")]
     public string ImageName { get; set; }
 

@@ -10,5 +10,9 @@ namespace image_repository.DBContext {
     public ImageDbContext(DbContextOptions<ImageDbContext> options) : base(options) { }
 
     public DbSet<ImageModel> Images { get; set; }
+
+    public ImageDbContext() : base() {
+      var created = Database.EnsureCreated();
+    }
   }
 }

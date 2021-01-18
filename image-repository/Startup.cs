@@ -22,7 +22,7 @@ namespace image_repository {
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services) {
       services.AddControllersWithViews().AddRazorRuntimeCompilation();
-      services.AddDbContext<ImageDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));
+      services.AddDbContext<ImageDbContext>(options => options.UseNpgsql(Configuration.GetSection("DBConnectionString").Value));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
