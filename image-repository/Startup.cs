@@ -1,4 +1,6 @@
 using image_repository.DBContext;
+using image_repository.Interfaces;
+using image_repository.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +25,7 @@ namespace image_repository {
     public void ConfigureServices(IServiceCollection services) {
       services.AddControllersWithViews().AddRazorRuntimeCompilation();
       services.AddDbContext<ImageDbContext>(options => options.UseNpgsql(Configuration.GetSection("DBConnectionString").Value));
+      services.AddScoped<IImageService, ImageService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
