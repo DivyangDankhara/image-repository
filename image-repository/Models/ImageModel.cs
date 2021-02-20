@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,9 +17,15 @@ namespace image_repository.Models {
     [DisplayName("Image Name")]
     public string ImageName { get; set; }
 
+    [Column(TypeName = "bytea")]
+    public byte[] ImageData { get; set; }
+
     [Required]
     [NotMapped]
     [DisplayName("Upload Image")]
     public IFormFile ImageFile { get; set; }
+
+    [NotMapped]
+    public string ImageDataURL { get; set; }
   }
 }

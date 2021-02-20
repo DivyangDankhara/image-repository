@@ -9,6 +9,7 @@ using image_repository.DBContext;
 using image_repository.Models;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace image_repository.Controllers {
   public class ImageController : Controller {
@@ -27,7 +28,7 @@ namespace image_repository.Controllers {
       var images = from i in _context.Images select i;
 
       if (!String.IsNullOrEmpty(searchString)) {
-        images = images.Where(i => i.Title.Contains(searchString));
+        images = images.Where(i => i.Title.ToLower().Contains(searchString.ToLower()));
       }
 
       return View(await images.ToListAsync());
@@ -60,16 +61,17 @@ namespace image_repository.Controllers {
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("ImageId,Title,ImageFile")] ImageModel imageModel) {
+      
       if (ModelState.IsValid) {
-        //Save image to wwwroot/image
+
         string wwwRootPath = _webHostEnvironment.WebRootPath;
         string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
         string extension = Path.GetExtension(imageModel.ImageFile.FileName);
         imageModel.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-        string path = Path.Combine(wwwRootPath + "/Image/", fileName);
-        using (var fileStream = new FileStream(path, FileMode.Create)) {
-          await imageModel.ImageFile.CopyToAsync(fileStream);
-        }
+
+        // converting the image into byte array.
+        imageModel.ImageData = ConvertIntoByteArray(imageModel.ImageFile);
+
         //Insert record
         _context.Add(imageModel);
         await _context.SaveChangesAsync();
@@ -103,6 +105,7 @@ namespace image_repository.Controllers {
 
       if (ModelState.IsValid) {
         try {
+          imageModel.ImageData = ConvertIntoByteArray(imageModel.ImageFile);
           _context.Update(imageModel);
           await _context.SaveChangesAsync();
         }
@@ -146,6 +149,13 @@ namespace image_repository.Controllers {
 
     private bool ImageModelExists(int id) {
       return _context.Images.Any(e => e.ImageId == id);
+    }
+
+    private byte[] ConvertIntoByteArray(IFormFile Image) {
+      MemoryStream ms = new MemoryStream();
+      Image.CopyTo(ms);
+      byte[] arr = ms.ToArray();
+      return arr;
     }
   }
 }
