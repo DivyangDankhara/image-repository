@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using image_repository.DBContext;
@@ -9,9 +10,10 @@ using image_repository.DBContext;
 namespace image_repository.Migrations
 {
     [DbContext(typeof(ImageDbContext))]
-    partial class ImageDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210220063213_initial-image")]
+    partial class initialimage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
