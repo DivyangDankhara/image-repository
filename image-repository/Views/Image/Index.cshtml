@@ -4,7 +4,7 @@
   ViewData["Title"] = "Image Repository";
 }
 
-<div style="display:flex; justify-content:center; margin-top:100px; margin-bottom:60px;">
+<div class="search-container">
   <div style="max-width:60%;">
     <form asp-action="Index" class="input-group">
       <input type="search" class="form-control rounded" placeholder="Search Image" aria-label="Search Image"
@@ -33,11 +33,18 @@
 
 @section Styles { 
 <style>
+
+  .search-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    margin-bottom: 60px;
+  }
+
   .a {
     width: 18rem;
     display: inline-block;
     margin: 10px;
-    
     z-index: 0;
   } 
   .a:hover {
