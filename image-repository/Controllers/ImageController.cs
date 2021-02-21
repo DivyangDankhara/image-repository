@@ -18,8 +18,7 @@ namespace image_repository.Controllers {
     // GET: Image
     public async Task<IActionResult> Index(string searchString) {
         
-        var images = await _imageService.Get(searchString)
-        /*images = images.Where(i => i.Title.ToLower().Contains(searchString.ToLower()))*/;
+      var images = await _imageService.Get(searchString);
 
       return View(images);
     }
@@ -27,6 +26,7 @@ namespace image_repository.Controllers {
 
     // GET: Image/Details/5
     public async Task<IActionResult> Details(int? id) {
+      
       if (id == null) {
         return NotFound();
       }
@@ -42,6 +42,7 @@ namespace image_repository.Controllers {
 
     // GET: Image/Create
     public IActionResult Create() {
+      
       return View();
     }
 
@@ -53,10 +54,10 @@ namespace image_repository.Controllers {
     public async Task<IActionResult> Create([Bind("ImageId,Title,ImageFile")] ImageModel imageModel) {
       
       if (ModelState.IsValid) {
-
         await _imageService.Create(imageModel);
         return RedirectToAction(nameof(Index));
       }
+      
       return View(imageModel);
     }
 
