@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace image_repository.Interfaces {
   public interface IImageService {
-    public Task<IList<ImageModel>> Get(string searchString);
+    public IList<ImageModel> Get(string searchString);
 
     public Task<ImageModel> GetById(int id);
 

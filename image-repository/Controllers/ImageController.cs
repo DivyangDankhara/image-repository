@@ -16,9 +16,9 @@ namespace image_repository.Controllers {
     }
 
     // GET: Image
-    public async Task<IActionResult> Index(string searchString) {
+    public IActionResult Index(string searchString) {
         
-      var images = await _imageService.Get(searchString);
+      var images = _imageService.Get(searchString);
 
       return View(images);
     }

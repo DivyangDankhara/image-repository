@@ -21,10 +21,10 @@ namespace image_repository.Services {
       _webHostEnvironment = webHostEnvironment;
     }
 
-    public async Task<IList<ImageModel>> Get(string searchString) {
+    public IList<ImageModel> Get(string searchString) {
       List<ImageModel> imageModels = new List<ImageModel>();
 
-      var images = from i in _context.Images select i;
+      var images = (from i in _context.Images select i);
 
       if (!String.IsNullOrEmpty(searchString)) {
         images = images.Where(i => i.Title.ToLower().Contains(searchString.ToLower()));

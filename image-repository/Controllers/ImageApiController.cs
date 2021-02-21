@@ -25,12 +25,13 @@ namespace image_repository.Controllers {
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ImageModel))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Get() {
+    public IActionResult Get() {
       var obj = _imageService.Get(string.Empty);
 
       if(obj is null) {
         return NotFound();
       }
+
       return Ok(obj);
     }
 
@@ -44,6 +45,7 @@ namespace image_repository.Controllers {
       if(obj == null) {
         return NotFound();
       }
+
       return Ok(obj);
     }
 
