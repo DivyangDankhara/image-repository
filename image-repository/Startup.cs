@@ -29,6 +29,8 @@ namespace image_repository {
       });
       services.AddDbContext<ImageDbContext>(options => options.UseNpgsql(Configuration.GetSection("DBConnectionString").Value));
       services.AddScoped<IImageService, ImageService>();
+
+      services.AddSwaggerGen();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +45,12 @@ namespace image_repository {
       }
       app.UseHttpsRedirection();
       app.UseStaticFiles();
+
+      app.UseSwagger();
+      app.UseSwaggerUI(c => {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+        c.DocumentTitle = "Image-Repository";
+      });
 
       app.UseRouting();
 

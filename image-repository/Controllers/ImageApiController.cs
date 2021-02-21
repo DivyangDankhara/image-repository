@@ -49,18 +49,23 @@ namespace image_repository.Controllers {
 
     // POST api/<ImageApiController>
     [HttpPost]
-    public void Post([FromBody] ImageModel model) {
+    public IActionResult Post([FromBody][Bind("ImageId,Title,ImageFile")] ImageModel model) {
 
+      return StatusCode(501);
     }
 
     // PUT api/<ImageApiController>/5
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value) {
+    public IActionResult Put(int id, [FromBody] string value) {
+      
+      return StatusCode(501);
     }
 
     // DELETE api/<ImageApiController>/5
     [HttpDelete("{id}")]
-    public void Delete(int id) {
+    public IActionResult Delete(int id) {
+
+      return StatusCode(501);
     }
   }
 }
