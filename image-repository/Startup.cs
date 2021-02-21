@@ -23,7 +23,10 @@ namespace image_repository {
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services) {
-      services.AddControllersWithViews().AddRazorRuntimeCompilation();
+      services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson().AddJsonOptions(options =>
+      {
+        options.JsonSerializerOptions.IgnoreNullValues = true;
+      });
       services.AddDbContext<ImageDbContext>(options => options.UseNpgsql(Configuration.GetSection("DBConnectionString").Value));
       services.AddScoped<IImageService, ImageService>();
     }
